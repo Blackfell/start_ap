@@ -14,16 +14,15 @@ Install:
 - terminator
 - WiFi card drivers
 
-
-## Useage
+## Usage
 
 You'll need to set the following script variables:
---------------------------------------------------------------------
+| Option      | Description                                        |
+|-------------|----------------------------------------------------|
 | DEVICE      | The name of your wifi device                       |
 | SSID        | The WiFi network name                              |
 | PASSPHRASE  | wifi-network-passphrase                            |
 | PROXY       | 0 for no proxying, 1 for HTTP and 2 for HTTP/HTTPS |
---------------------------------------------------------------------
 
 Then just run the script:
 
