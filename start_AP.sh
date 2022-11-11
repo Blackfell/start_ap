@@ -5,7 +5,7 @@ DEVICE=wlan0
 WAN=eth0
 SSID=blackfell
 PASSPHRASE=trainer-glob-easter
-PROXY=2     # 1 for HTTP only 2 for HTTPS too, 0 for none
+PROXY=1     # 1 for HTTP only 2 for HTTPS too, 0 for none
 
 # Shutdown stuff
 function sthap() {
@@ -18,7 +18,7 @@ function sthap() {
     sudo iptables -D FORWARD --source 10.69.42.0/24 -j ACCEPT
     sudo iptables -D OUTPUT -m state --state ESTABLISHED -j ACCEPT
     sudo iptables -t nat -D PREROUTING -s 10.69.42.0/24 -p tcp --dport 80 -j DNAT --to-destination 10.69.42.1:9080
-    sudo iptables -t nat -D PREROUTING -s 10.69.42.0/24 -p tcp --dport 80 -j DNAT --to-destination 10.69.42.1:9443
+    sudo iptables -t nat -D PREROUTING -s 10.69.42.0/24 -p tcp --dport 443 -j DNAT --to-destination 10.69.42.1:9443
     # Port forward
     # Sort out config files
     for i in ./*.conf; do
@@ -68,7 +68,7 @@ sudo iptables -A OUTPUT -m state --state ESTABLISHED -j ACCEPT
 # Start DNS
 echo "[-] - Starting high visibilty DNS..."
 sudo terminator -e 'dnschef -i 10.69.42.1' 2>/dev/null &
-sleep 3
+sleep 5
 if pgrep -fx 'python3 /usr/bin/dnschef -i 10.69.42.1' > /dev/null  ; then
     echo "[+] DNS Chef started!"
 else
